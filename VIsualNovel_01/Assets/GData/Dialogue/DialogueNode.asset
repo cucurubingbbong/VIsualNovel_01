@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DialogueNode
   m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
   dialogueArray:
-  - dialogueText: "\uC548\uB155?"
+  - dialogueText: "5213333333333\u3142\u3131\u3148\u3137\u3131\u3148\u3142\u3131\u3148\u3142\u3131\u3142\u3148\u3131\u3148\u3142\u3137\n\u3141\u3147\u3134\u313B\u3134\u3139\u3134\u3141\u3139\n\u3141\u3134\u3139\u3147\u3141\u3134\u313B\u3134"
     characterData: {fileID: 11400000, guid: d3557afb627d60847891fb392d44ee4e, type: 2}
     backgroundImage: {fileID: 0}
     emotionType: 0

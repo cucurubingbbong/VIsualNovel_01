@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 051268962eb787e45aa2c231e267698f, type: 3}
   m_Name: GameOptionSettings
   m_EditorClassIdentifier: Assembly-CSharp::GameOptionSettings
-  textSpeed: 0.05
+  textSpeed: 0.1
   autoPlayDelay: 2
