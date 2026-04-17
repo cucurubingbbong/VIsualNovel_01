@@ -1311,6 +1311,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76f2ac27e5b7e414e9d24e884e94a268, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueManager
+  currentNode: {fileID: 0}
+  startNode: {fileID: 11400000, guid: 19c0c65dac2bbec46b9f5a84457d0191, type: 2}
+  nameText: {fileID: 989204423}
+  dialogueText: {fileID: 2014287944}
+  characterImage: {fileID: 1775947673}
+  backgroundImage: {fileID: 916886546}
+  characterDataArray:
+  - {fileID: 11400000, guid: d3557afb627d60847891fb392d44ee4e, type: 2}
 --- !u!1 &1279213546
 GameObject:
   m_ObjectHideFlags: 0
