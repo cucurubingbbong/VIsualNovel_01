@@ -56,6 +56,10 @@ public class DialogueManager : ManagerBase
     /// 타이핑 효과가 끝났는지 여부
     /// </summary>
     [SerializeField] private bool typeisEnd = false;
+
+    /// <summary>
+    /// 초기화 메서드
+    /// </summary>
     public override void Init()
     {
         base.Init();
