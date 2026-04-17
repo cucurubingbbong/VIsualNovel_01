@@ -38,10 +38,16 @@ public class DialogueManager : ManagerBase
     /// <summary>
     /// 현재 대사 배열 인덱스
     /// </summary>
-
     public int index = 0;
-
+    /// <summary>
+    /// 대사 스킵 여부
+    /// </summary>
     public bool isSkip = false;
+    
+    /// <summary>
+    /// 타이핑 효과가 끝났는지 여부
+    /// </summary>
+    [SerializeField] private bool typeisEnd = false;
 
 
 
@@ -57,12 +63,16 @@ public class DialogueManager : ManagerBase
 
     void Update()
     {
+        /// 마우스 클릭 시 다음 대사로 이동
         if(Input.GetMouseButtonDown(0))
         {
             NextDialogue();
         }
     }
 
+    /// <summary>
+    /// 대화 시작 메서드
+    /// </summary>
     public void StartDialogue()
     {
         currentNode = startNode;
@@ -75,18 +85,50 @@ public class DialogueManager : ManagerBase
             Debug.LogWarning("시작 노드가 설정되지 않았거나 대사 배열이 비어 있습니다.");
         }
     }
+    /// <summary>
+    /// 다음 대사로 이동하는 메서드
+    /// </summary>
     public void NextDialogue()
     {
         if(currentNode.dialogueArray.Length > index && index >= 0)
         {
+            if(!typeisEnd)
+            {
+                StopAllCoroutines();
+                typeisEnd = true;
+                dialogueText.text = currentNode.dialogueArray[index].dialogueText;
+                return;
+            }
+            dialogueText.text = "";
             DisplayDialogue(currentNode.dialogueArray[index]);
         }
         else
         {
-            Debug.LogWarning("유효하지 않은 대사 인덱스입니다.");
+            NextNode();
         }
     }
 
+    /// <summary>
+    /// 다음 노드로 이동하는 메서드
+    /// </summary>
+    public void NextNode()
+    {
+        currentNode = currentNode.GetNextNode();
+        if (currentNode != null && currentNode.dialogueArray.Length > 0)
+        {
+            index = 0; // 인덱스 초기화
+            DisplayDialogue(currentNode.dialogueArray[index]);
+        }
+        else
+        {
+            Debug.LogWarning("다음 노드가 없거나 대사 배열이 비어 있습니다.");
+        }
+    }
+
+    /// <summary>
+    /// 대사 데이터를 UI에 표시하는 메서드
+    /// </summary>
+    /// <param name="data">표시할 대사 데이터</param>
     public void DisplayDialogue(DialogueData data)
     {
         // 이름 텍스트 업데이트
@@ -101,16 +143,21 @@ public class DialogueManager : ManagerBase
         StartCoroutine(TypeText(data.dialogueText));
     }
 
-
-
+    /// <summary>
+    /// 대사 텍스트에 타이핑 효과를 적용하는 코루틴
+    /// </summary>
+    /// <param name="text">타이핑할 텍스트</param>
+    /// <returns></returns>
     IEnumerator TypeText(string text)
     {
+        typeisEnd = false;
         dialogueText.text = "";
         foreach (char letter in text.ToCharArray())
         {
             dialogueText.text += letter;
             yield return new WaitForSeconds(0.05f); // 글자 사이의 딜레이
         }
+        typeisEnd = true;
     }
 
 
