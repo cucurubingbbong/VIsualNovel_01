@@ -1048,7 +1048,7 @@ RectTransform:
   m_Children:
   - {fileID: 940642679}
   - {fileID: 962382034}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1271691205}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1296,7 +1296,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 969806053}
   m_Father: {fileID: 772714343}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1271691206
@@ -1311,6 +1312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76f2ac27e5b7e414e9d24e884e94a268, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueManager
+  gameOptionSettings: {fileID: 11400000, guid: 47985e01efdcaba41bdbbb13951d282c, type: 2}
   currentNode: {fileID: 0}
   startNode: {fileID: 11400000, guid: 19c0c65dac2bbec46b9f5a84457d0191, type: 2}
   nameText: {fileID: 989204423}
@@ -1319,6 +1321,10 @@ MonoBehaviour:
   backgroundImage: {fileID: 916886546}
   characterDataArray:
   - {fileID: 11400000, guid: d3557afb627d60847891fb392d44ee4e, type: 2}
+  index: 0
+  isSkip: 0
+  isAutoPlay: 0
+  typeisEnd: 0
 --- !u!1 &1279213546
 GameObject:
   m_ObjectHideFlags: 0
@@ -2202,6 +2208,5 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 619394802}
-  - {fileID: 969806053}
   - {fileID: 891891138}
   - {fileID: 772714343}

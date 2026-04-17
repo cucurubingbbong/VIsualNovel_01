@@ -25,4 +25,8 @@ MonoBehaviour:
     characterData: {fileID: 11400000, guid: d3557afb627d60847891fb392d44ee4e, type: 2}
     backgroundImage: {fileID: 0}
     emotionType: 0
+  - dialogueText: "\uBC84\uBC84\uBC84\uBC84\uBC95\uBC99\u3147"
+    characterData: {fileID: 11400000, guid: d3557afb627d60847891fb392d44ee4e, type: 2}
+    backgroundImage: {fileID: 0}
+    emotionType: 0
   nextNode: {fileID: 0}

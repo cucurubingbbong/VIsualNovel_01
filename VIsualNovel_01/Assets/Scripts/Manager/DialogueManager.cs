@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class DialogueManager : ManagerBase
 {
+    [Header("설정")]
+    [SerializeField] private GameOptionSettings gameOptionSettings;
+
     [Header("노드 설정")]
     /// <summary>
     /// 현재 대화 노드
@@ -43,14 +46,16 @@ public class DialogueManager : ManagerBase
     /// 대사 스킵 여부
     /// </summary>
     public bool isSkip = false;
-    
+
+    /// <summary>
+    /// 자동 재생 여부
+    /// </summary>
+    public bool isAutoPlay = false;
+
     /// <summary>
     /// 타이핑 효과가 끝났는지 여부
     /// </summary>
     [SerializeField] private bool typeisEnd = false;
-
-
-
     public override void Init()
     {
         base.Init();
@@ -64,7 +69,7 @@ public class DialogueManager : ManagerBase
     void Update()
     {
         /// 마우스 클릭 시 다음 대사로 이동
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             NextDialogue();
         }
@@ -90,9 +95,10 @@ public class DialogueManager : ManagerBase
     /// </summary>
     public void NextDialogue()
     {
-        if(currentNode.dialogueArray.Length > index && index >= 0)
+        if (currentNode.dialogueArray.Length > index + 1 && index >= 0)
         {
-            if(!typeisEnd)
+            index++;
+            if (!typeisEnd)
             {
                 StopAllCoroutines();
                 typeisEnd = true;
@@ -113,6 +119,11 @@ public class DialogueManager : ManagerBase
     /// </summary>
     public void NextNode()
     {
+        if(currentNode.GetNextNode() == null)
+        {
+            Debug.LogWarning("다음 노드가 없습니다.");
+            return;
+        }
         currentNode = currentNode.GetNextNode();
         if (currentNode != null && currentNode.dialogueArray.Length > 0)
         {
@@ -155,7 +166,7 @@ public class DialogueManager : ManagerBase
         foreach (char letter in text.ToCharArray())
         {
             dialogueText.text += letter;
-            yield return new WaitForSeconds(0.05f); // 글자 사이의 딜레이
+            yield return new WaitForSeconds(gameOptionSettings.textSpeed); // 글자 사이의 딜레이
         }
         typeisEnd = true;
     }
