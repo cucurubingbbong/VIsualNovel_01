@@ -18,7 +18,6 @@ public class CharacterData : ScriptableObject
     /// 캐릭터의 감정 유형과 이미지 데이터 배열
     /// </summary>
     public CharImgData[] charImgDataArray;
-
     private Dictionary<EmotionType, Sprite> charImgDictionary;
 
     public void Init()
@@ -38,6 +37,7 @@ public class CharacterData : ScriptableObject
 
     public Sprite GetCharImg(EmotionType emotionType)
     {
+        // ?은 null 병합 연산자로, charImgDictionary에서 emotionType에 해당하는 Sprite를 가져오고, 없으면 null을 반환합니다.
         return charImgDictionary.TryGetValue(emotionType, out Sprite charImg) ? charImg : null;
     }
 }
