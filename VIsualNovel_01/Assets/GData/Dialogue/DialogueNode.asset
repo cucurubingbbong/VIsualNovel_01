@@ -29,4 +29,11 @@ MonoBehaviour:
     characterData: {fileID: 11400000, guid: d3557afb627d60847891fb392d44ee4e, type: 2}
     backgroundImage: {fileID: 0}
     emotionType: 0
+  choiceArray:
+  - choiceText: 
+    nextNode: {fileID: 0}
+  - choiceText: 
+    nextNode: {fileID: 0}
+  - choiceText: 
+    nextNode: {fileID: 0}
   nextNode: {fileID: 0}

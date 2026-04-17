@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [System.Serializable]
-public class DialogueData
+public struct DialogueData
 {
     /// <summary>
     /// 대사 텍스트

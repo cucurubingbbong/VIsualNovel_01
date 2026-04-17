@@ -9,6 +9,16 @@ public class DialogueNode : ScriptableObject
     public DialogueData[] dialogueArray = new DialogueData[0];
 
     /// <summary>
+    /// 선택지 데이터 배열
+    /// </summary>
+    public ChoiceData[] choiceArray;
+
+    /// <summary>
+    /// 선택지가 있는지 여부
+    /// </summary>
+    public bool hasChoices => choiceArray != null && choiceArray.Length > 0;
+
+    /// <summary>
     /// 다음 대사 노드
     /// </summary>
     [SerializeField] private DialogueNode nextNode;

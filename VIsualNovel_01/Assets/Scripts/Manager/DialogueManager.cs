@@ -17,6 +17,7 @@ public class DialogueManager : ManagerBase
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private Image characterImage;
     [SerializeField] private Image backgroundImage;
+    [SerializeField] private Button[] choiceButtons = new Button[3];
 
     [Header("캐릭터 데이터 배열")]
     [SerializeField] private CharacterData[] characterDataArray;
@@ -53,7 +54,7 @@ public class DialogueManager : ManagerBase
     /// <summary>
     /// 대화 시작
     /// </summary>
-    public void StartDialogue()
+    private void StartDialogue()
     {
         currentNode = startNode;
         index = 0;
@@ -72,7 +73,7 @@ public class DialogueManager : ManagerBase
     /// <summary>
     /// 다음 대사로 이동
     /// </summary>
-    public void NextDialogue()
+    private void NextDialogue()
     {
         if (currentNode == null || currentNode.dialogueArray == null || currentNode.dialogueArray.Length == 0)
             return;
@@ -103,14 +104,14 @@ public class DialogueManager : ManagerBase
         else
         {
             // 3. 현재 노드의 마지막 대사까지 끝났으면 다음 노드로 이동
-            NextNode();
+            DisplayChoices(); // 선택지가 있는 경우 선택지 표시, 없으면 다음 노드로 이동
         }
     }
 
     /// <summary>
     /// 다음 노드로 이동
     /// </summary>
-    public void NextNode()
+    private void NextNode()
     {
         DialogueNode nextNode = currentNode.GetNextNode();
 
@@ -137,7 +138,7 @@ public class DialogueManager : ManagerBase
     /// <summary>
     /// 대사 데이터를 UI에 표시
     /// </summary>
-    public void DisplayDialogue(DialogueData data)
+    private void DisplayDialogue(DialogueData data)
     {
         nameText.text = data.characterData.characterName;
         characterImage.sprite = data.characterData.GetCharImg(data.emotionType);
@@ -154,7 +155,7 @@ public class DialogueManager : ManagerBase
     /// <summary>
     /// 타이핑 효과
     /// </summary>
-    IEnumerator TypeText(string text)
+    private IEnumerator TypeText(string text)
     {
         typeisEnd = false;
         dialogueText.text = "";
@@ -167,5 +168,61 @@ public class DialogueManager : ManagerBase
 
         typeisEnd = true;
         typingCoroutine = null;
+    }
+
+    /// <summary>
+    /// 선택지 표시
+    /// </summary>
+    private void DisplayChoices()
+    {
+        if (currentNode.hasChoices)
+        {
+            for (int i = 0; i < choiceButtons.Length; i++)
+            {
+                if (i < currentNode.choiceArray.Length)
+                {
+                    choiceButtons[i].gameObject.SetActive(true);
+                    choiceButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = currentNode.choiceArray[i].choiceText;
+                    int choiceIndex = i; // 클로저 문제 방지
+                    choiceButtons[i].onClick.RemoveAllListeners();
+                    choiceButtons[i].onClick.AddListener(() => OnChoiceSelected(choiceIndex));
+                }
+                else
+                {
+                    choiceButtons[i].gameObject.SetActive(false);
+                }
+            }
+        }
+        else
+        {
+            foreach (Button button in choiceButtons)
+            {
+                button.gameObject.SetActive(false);
+            }
+            NextNode(); // 선택지가 없는 경우 다음 노드로 자동 이동
+        }
+    }
+
+    /// <summary>
+    /// 선택지 선택 시 호출되는 메서드
+    /// </summary>
+    /// <param name="choiceIndex">선택된 선택지의 인덱스</param>
+    private void OnChoiceSelected(int choiceIndex)
+    {
+        if (currentNode.hasChoices && choiceIndex < currentNode.choiceArray.Length)
+        {
+            DialogueNode nextNode = currentNode.choiceArray[choiceIndex].nextNode;
+            if (nextNode != null)
+            {
+                currentNode = nextNode;
+                index = 0;
+                typeisEnd = true;
+                DisplayDialogue(currentNode.dialogueArray[index]);
+            }
+            else
+            {
+                Debug.LogWarning("선택지에 연결된 다음 노드가 없습니다.");
+            }
+        }
     }
 }

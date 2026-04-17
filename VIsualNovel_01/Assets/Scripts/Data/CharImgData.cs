@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 [System.Serializable]
-public class CharImgData
+public struct CharImgData
 {
     /// <summary>
     /// 감정 유형
