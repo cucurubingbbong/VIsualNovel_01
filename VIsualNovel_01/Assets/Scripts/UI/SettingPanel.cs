@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettingPanel : MonoBehaviour
+public class SettingPanel : UIRoot
 {
     /// <summary>
     /// 게임 옵션 설정 ScriptableObject 참조
