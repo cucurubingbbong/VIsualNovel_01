@@ -25,7 +25,7 @@ public class DialogueManager : ManagerBase
     [Header("대사 관련 변수들")]
     public int index = 0;
     public bool isSkip = false;
-    public bool isAutoPlay = false;
+
 
     [SerializeField] private bool typeisEnd = false;
 
@@ -168,6 +168,13 @@ public class DialogueManager : ManagerBase
 
         typeisEnd = true;
         typingCoroutine = null;
+
+        /// 자동 재생 모드가 활성화된 경우 일정 시간 후 다음 대사로 이동
+        if(gameOptionSettings.isAutoPlayEnabled)
+        {
+            yield return new WaitForSeconds(gameOptionSettings.autoPlayDelay);
+            NextDialogue();
+        }
     }
 
     /// <summary>

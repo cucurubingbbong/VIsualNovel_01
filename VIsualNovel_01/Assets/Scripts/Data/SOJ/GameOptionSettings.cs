@@ -14,4 +14,5 @@ public class GameOptionSettings : ScriptableObject
 
     [Range(0.0f, 1.0f)]
     public float sfxVolume = 0.5f; // 효과음 볼륨 (0.0 ~ 1.0)
+    public bool isAutoPlayEnabled = false; // 자동 재생 모드 활성화 여부
 }
