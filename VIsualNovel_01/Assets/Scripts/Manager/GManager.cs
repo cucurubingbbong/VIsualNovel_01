@@ -4,6 +4,8 @@ public class GManager : ManagerBase
 {
     public static GManager Instance {get; private set;}
 
+    public UIManager uiManager;
+
     /// <summary>
     /// 초기화할 매니저들
     /// </summary>
