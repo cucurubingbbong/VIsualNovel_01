@@ -25,8 +25,6 @@ public class DialogueManager : ManagerBase
     [Header("대사 관련 변수들")]
     public int index = 0;
     public bool isSkip = false;
-
-
     [SerializeField] private bool typeisEnd = false;
 
     private Coroutine typingCoroutine;
@@ -232,4 +230,8 @@ public class DialogueManager : ManagerBase
             }
         }
     }
+    
+    // 스킵 기능은 보류 생각중임
+
+    // 로그 기능은 4월 20일까진 구현할듯
 }
